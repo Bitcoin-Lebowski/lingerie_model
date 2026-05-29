@@ -51,7 +51,7 @@ function App() {
   const proj = (day) => K.price_now * (centre(day) / centre(TODAY)) * Math.pow(10, damped(day) - damped(TODAY));
 
   // ---- geometry ----
-  const W = 1000, H = 560, ML = 60, MR = 16, MT = 16, MB = 30;
+  const W = 1000, H = 450, ML = 60, MR = 16, MT = 16, MB = 30;
   const PW = W - ML - MR, PH = H - MT - MB;
   const dMin = dayOf(2010, 7, 1), dMax = dayOf(2034, 6, 1);
   const pMin = 0.05, pMax = 5e6;
@@ -123,7 +123,7 @@ function App() {
               <span style={{ color: "#e6edf5" }}>—</span> price &nbsp;<span style={{ color: acc }}>—</span> ceiling &nbsp;<span style={{ color: BLUE }}>—</span> fair &nbsp;<span style={{ color: GRN }}>—</span> floor &nbsp;<span style={{ color: TEAL }}>—</span> cost basis
             </span>
           </div>
-          <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto" }}>
+          <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "auto", maxHeight: "52vh", display: "block" }}>
             {priceTicks.map((p) => (
               <g key={p}>
                 <line x1={ML} x2={W - MR} y1={yP(p)} y2={yP(p)} stroke="#1b2230" />
