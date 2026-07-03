@@ -1,4 +1,4 @@
-# The Unified Bitcoin Price Model
+# The Lingerie Model
 
 By Bitcoin Lebowski
 
@@ -26,7 +26,7 @@ Every popular Bitcoin model captures one true thing and then overreaches by trea
 
 Stock-to-flow captured scarcity but ignored demand entirely, which is why it implies an infinite price as issuance falls to zero, and why it failed out of sample after 2021. The power-law-in-time models captured the long arc but offered no mechanism for cycles and no account of how the model could be wrong. Metcalfe-style models captured the demand side but said nothing about supply. Diminishing-returns observations and rainbow charts are descriptions rather than models.
 
-The resolution is to stop treating these as rivals. They describe different layers of one system: a secular trend, a cyclical oscillation around that trend, and a market-clearing mechanism that generates both. The Unified Bitcoin Price Model is that decomposition, written so each layer is testable and so the layers explain one another.
+The resolution is to stop treating these as rivals. They describe different layers of one system: a secular trend, a cyclical oscillation around that trend, and a market-clearing mechanism that generates both. The Lingerie Model is that decomposition, written so each layer is testable and so the layers explain one another.
 
 ## The model in one equation
 
