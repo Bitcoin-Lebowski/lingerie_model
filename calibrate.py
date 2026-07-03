@@ -1,5 +1,5 @@
 """
-calibrate.py  -  The Unified Bitcoin Price Model
+calibrate.py  -  The Lingerie Model
 Reproduces every constant used in index.html from open data.
 
 Data source: Coin Metrics community data (open, attribution requested)
