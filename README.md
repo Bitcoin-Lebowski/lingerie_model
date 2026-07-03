@@ -4,9 +4,21 @@ By Bitcoin Lebowski
 
 A long-horizon valuation model for Bitcoin that fuses the strongest parts of the existing models into one coherent structure, grounded in a power law of network growth, a damped halving cycle, and a supply and demand mechanism anchored to on-chain cost basis. Every parameter is fitted to 5,789 daily observations from 2010 to 2026, and the calibration is fully reproducible from open data.
 
-Open index.html in any browser to use the interactive chart, or host it for free with GitHub Pages. Run calibrate.py to reproduce every number from source.
+Open index.html in any browser to use the interactive chart. It is a single self-contained file with no build step and no dependencies, so it also works offline and straight from disk. It fetches the current Bitcoin price on load, and falls back to a stored snapshot if it cannot reach the network. Host it for free with GitHub Pages, and run calibrate.py to reproduce every fitted number from source.
 
 This is a thinking and positioning map, not a forecast, and nothing here is investment advice. See the disclaimer at the end.
+
+## Using the interactive chart
+
+The chart plots the real daily price history, the power-law trend, the floor and the declining cycle-high envelope, the on-chain cost-basis line, and a forward projection from the fitted cycle.
+
+Live price. On load the page pulls the latest daily closes from Coinbase, then updates the spot figure, the ratio to trend, MVRV, and the recent price path. A small dot at the top right shows the state, green with the date when the live feed is used, grey when it has fallen back to the stored snapshot. If Coinbase is unreachable it tries CoinGecko for the current price, and if both fail it keeps the last stored snapshot, so the page never breaks.
+
+Date lookup. The box under the chart takes any date and reads out the floor, fair value and cycle high on that date, with a marker line on the chart carrying a dot for each. Note that the floor is a rising line, not a fixed number, so a future date returns a higher floor than today, because the whole band climbs with the trend.
+
+Controls. The sliders expose the trend exponent, the trend intercept, the floor multiple, and a future trend haircut that bends the forward trend down to model a flattening S-curve. Toggles switch between log-log and calendar axes, show or hide the cost-basis line, and show or hide the forward projection.
+
+What updates and what does not. The live feed refreshes the price and everything derived from it. It does not move the trend, the cycle, or the rails, which are fitted parameters that do not change day to day, and it does not update the on-chain cost-basis line, which comes from the calibration dataset. So the price runs to today automatically, while the fitted structure is only as fresh as the last calibration.
 
 ## Why another model
 
@@ -46,7 +58,7 @@ Plotted on log-log axes, Bitcoin's price has traced a near-straight line for fif
 
 This is not arbitrary curve fitting. The power law follows from composing two relationships. Adoption, measured by active users or addresses, has grown as a power law of time, which is what you see in many networks and technologies during their growth phase. Network value scales with adoption in a Metcalfe-like way, value rising faster than users. A composition of power laws is itself a power law, and the exponent near 5.7 is the product of those growth rates. The mining difficulty adjustment supplies the feedback that keeps the system self-regulating: a higher price attracts hash rate, which raises security, which supports adoption, which supports price, while difficulty re-targets to keep block production steady through it all.
 
-Two consequences matter. First, diminishing returns are built in for free. A fixed exponent is a fixed slope on log-log axes, but in calendar terms a given period buys an ever-smaller fractional increase in t as t grows, so the multiple delivered per cycle shrinks automatically with no extra assumption. The fair-value doubling time is roughly 2.2 years now and lengthens to around 3.4 years by the mid-2030s. Second, the trend defines a fair value. At present it sits near 132,000 US dollars, against a spot price around 73,500, so the model reads Bitcoin as trading at roughly half its trend value, low in the band, which is where a post-peak correction belongs after the all-time high of 126,198 on 6 October 2025.
+Two consequences matter. First, diminishing returns are built in for free. A fixed exponent is a fixed slope on log-log axes, but in calendar terms a given period buys an ever-smaller fractional increase in t as t grows, so the multiple delivered per cycle shrinks automatically with no extra assumption. The fair-value doubling time is roughly 2.2 years now and lengthens to around 3.4 years by the mid-2030s. Second, the trend defines a fair value. As of mid-2026 it sits near 135,000 US dollars, while price is around 61,700, so the model reads Bitcoin as trading well below trend and resting close to its floor, which is where a deep post-peak correction belongs after the all-time high of 126,198 on 6 October 2025. The live chart keeps this comparison current.
 
 ## Layer two: the cycle is a damped halving oscillation
 
@@ -108,6 +120,8 @@ python calibrate.py
 ```
 
 The headline fit is log10 P = -16.4565 + 5.6738 * log10(day), R-squared 0.962. Adjust the source window or the slope in the script to test sensitivity. The interactive chart also exposes the exponent, the intercept, the floor multiple, and a future trend haircut, so you can stress the model by hand.
+
+On the live page the headline price is refreshed on load from Coinbase, with CoinGecko as a fallback, so the spot figure and its distance from trend stay current between calibrations. The fitted parameters and the on-chain cost-basis line are as of the last calibration run, currently the daily data to May 2026. Rerunning calibrate.py and pasting the refreshed constants into index.html brings the fitted structure up to date.
 
 ## Limitations and honest caveats
 
